@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    {% if current_user == post.author %}
+        <a href="{{ url_for('update_post', post_id=post.id) }}" class="btn btn-info">Edit</a>
+        <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}" style="display:inline;">
+            {{ form.hidden_tag() }}
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
